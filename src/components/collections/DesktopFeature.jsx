@@ -1,8 +1,9 @@
 "use client";
-import React, { Fragment, useEffect, useRef, useState } from "react";
+
+import React, { useState, useRef, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { useDebouncedCallback } from "use-debounce";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import clsx from "clsx";
 import { features } from "./FrameView";
 import CircleBackground from "./CircleBackground";
@@ -18,33 +19,53 @@ const usePrevious = (value) => {
 
 const DesktopFeature = () => {
   const { t } = useTranslation();
-  let [changeCount, setChangeCount] = useState(0);
-  let [selectedIndex, setSelectedIndex] = useState(0);
-  let prevIndex = usePrevious(selectedIndex);
-  let isForwards = prevIndex === undefined ? true : selectedIndex > prevIndex;
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const animationControlsArray = features.map(() => useAnimation());
+  const intervalRef = useRef(null);
 
-  let onChange = useDebouncedCallback(
-    (selectedIndex) => {
-      setSelectedIndex(selectedIndex);
-      setChangeCount((changeCount) => changeCount + 1);
-    },
-    100,
-    { leading: true }
-  );
+  const nextFeature = () => {
+    setSelectedIndex((prevIndex) =>
+      prevIndex === features.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition >= 1060 && scrollPosition <= 2400) {
+        if (!intervalRef.current) {
+          intervalRef.current = setInterval(nextFeature, 3000);
+        }
+      } else {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+        setSelectedIndex(0); // Reiniciar el índice cuando salimos del rango de scroll
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleMouseEnter = () => {
+    clearInterval(intervalRef.current);
+  };
+
+  const handleMouseLeave = () => {
+    intervalRef.current = setInterval(nextFeature, 3000);
+  };
 
   return (
-    <Tab.Group
-      as="div"
-      className="grid grid-cols-12 items-center gap-8 lg:gap-16 xl:gap-24 px-6"
-      selectedIndex={selectedIndex}
-      onChange={onChange}
-      vertical
-    >
-      <Tab.List className="relative z-10 order-last col-span-6 space-y-6">
+    <div className="grid grid-cols-12 items-center gap-8 lg:gap-16 xl:gap-24 px-6">
+      <ul className="relative z-10 order-last col-span-6 space-y-6">
         {features.map((feature, featureIndex) => (
-          <div
+          <motion.li
             key={t(feature.name)}
-            className="relative rounded-2xl transition-colors hover:bg-gray-800/30"
+            className={`relative rounded-2xl transition-all hover:bg-gray-800/30 ${
+              featureIndex === selectedIndex ? 'bg-gray-800/30' : ''
+            }`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             {featureIndex === selectedIndex && (
               <motion.div
@@ -54,7 +75,6 @@ const DesktopFeature = () => {
               />
             )}
             <div className="relative z-10 p-8">
-              {/* <feature.icon className="h-8 w-8" /> */}
               <Image
                 className="h-16 w-16"
                 src={feature.icon}
@@ -63,43 +83,27 @@ const DesktopFeature = () => {
                 width={10}
               />
               <h3 className="mt-6 text-lg font-semibold text-white">
-                <Tab className="text-left [&:not(:focus-visible)]:focus:outline-none outline-none">
+                <button
+                  className="text-left [&:not(:focus-visible)]:focus:outline-none outline-none"
+                  onClick={() => setSelectedIndex(featureIndex)}
+                >
                   <span className="absolute inset-0 rounded-2xl" />
                   {t(feature.name)}
-                </Tab>
+                </button>
               </h3>
               <p className="mt-2 text-sm text-gray-400">
                 {t(feature.description)}
               </p>
             </div>
-          </div>
+          </motion.li>
         ))}
-      </Tab.List>
+      </ul>
       <div className="relative col-span-6">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <CircleBackground color="#98C9F0" className="animate-spin-slower" />
         </div>
-
-        <Tab.Panels as={Fragment}>
-          {/* <AnimatePresence
-              initial={false}
-              custom={{ isForwards, changeCount }}
-            > */}
-          {features.map((feature, featureIndex) =>
-            selectedIndex === featureIndex ? (
-              <Tab.Panel
-                static
-                key={feature.name + changeCount}
-                className="col-start-1 row-start-1 flex focus:outline-offset-[32px] [&:not(:focus-visible)]:focus:outline-none"
-              >
-                {/* <feature.screen animated custom={{ isForwards, changeCount }} /> */}
-              </Tab.Panel>
-            ) : null
-          )}
-          {/* </AnimatePresence> */}
-        </Tab.Panels>
       </div>
-    </Tab.Group>
+    </div>
   );
 };
 
@@ -107,38 +111,103 @@ export default DesktopFeature;
 
 export const FeatureMobile = () => {
   const { t } = useTranslation();
-  let [activeIndex, setActiveIndex] = useState(0);
-  let slideContainerRef = useRef();
-  let slideRefs = useRef([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [inSection, setInSection] = useState(false);
+  const slideContainerRef = useRef();
+  const slideRefs = useRef([]);
+
+  const features = [
+    {
+      name: "featureOneTitleCol",
+      description: "featureOneSubtitleCol",
+      icon: "/Elementos-2D-16.svg",
+    },
+    {
+      name: "featureTwoTitleCol",
+      description: "featureTwoSubtitleCol",
+      icon: "/Elementos-2D-08.svg",
+    },
+    {
+      name: "featureThreeTitleCol",
+      description: "featureThreeSubtitleCol",
+      icon: "/Elementos-2D-12.svg",
+    },
+    {
+      name: "featureFourTitleCol",
+      description: "featureFourSubtitleCol",
+      icon: "/Elementos-2D-06.svg",
+    },
+  ];
+
+  const handleSlideChange = (index) => {
+    slideRefs.current[index].scrollIntoView({
+      block: 'nearest',
+      inline: 'nearest',
+    });
+  };
+
   useEffect(() => {
-    let observer = new window.IntersectionObserver(
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const startAnimationHeight = 1500; 
+      const stopAnimationHeight = 1900; 
+      
+      if (scrollPosition > startAnimationHeight && scrollPosition < stopAnimationHeight) {
+        setInSection(true);
+      } else {
+        setInSection(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    let interval;
+    if (inSection) {
+      interval = setInterval(() => {
+        const nextIndex = (activeIndex + 1) % features.length;
+        handleSlideChange(nextIndex);
+      }, 3000);
+    }
+
+    return () => clearInterval(interval);
+  }, [activeIndex, features.length, inSection]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
       (entries) => {
         for (let entry of entries) {
           if (entry.isIntersecting) {
             setActiveIndex(slideRefs.current.indexOf(entry.target));
+            setInSection(true);
             break;
           }
         }
       },
       {
-        root: slideContainerRef.current,
-        threshold: 0.6,
+        root: null,
+        threshold: 0.9,
       }
     );
 
-    for (let slide of slideRefs.current) {
+    slideRefs.current.forEach((slide) => {
       if (slide) {
         observer.observe(slide);
       }
-    }
+    });
 
     return () => {
       observer.disconnect();
     };
-  }, [slideContainerRef, slideRefs]);
+  }, [slideRefs]);
 
   return (
-    <div className="h-auto">
+    <div className="h-auto flex flex-col">
       <div
         ref={slideContainerRef}
         className="-mb-4 flex snap-x snap-mandatory -space-x-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-4 [scrollbar-width:none] sm:-space-x-6 [&::-webkit-scrollbar]:hidden"
@@ -148,13 +217,16 @@ export const FeatureMobile = () => {
             key={featureIndex}
             ref={(ref) => (slideRefs.current[featureIndex] = ref)}
             className="w-full flex-none snap-center px-4 sm:px-6"
-          >
-            <div className="relative transform overflow-hidden rounded-2xl bg-gray-800 px-5 py-6">
+            style={{ minHeight: "68vw", width: "100vw" }} 
+         >
+            <div className="relative transform overflow-hidden rounded-2xl bg-gray-800 px-5 py-6" 
+                  style={{ minHeight: "100%", minWidth: "100%" }}
+            >
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                <CircleBackground
+                {/* <CircleBackground
                   color="#98C9F0"
                   className="animate-spin-slower"
-                />
+                /> */}
               </div>
 
               {/* <feature.screen /> */}
@@ -189,12 +261,7 @@ export const FeatureMobile = () => {
               featureIndex === activeIndex ? "bg-gray-300" : "bg-gray-500"
             )}
             aria-label={`Go to slide ${featureIndex + 1}`}
-            onClick={() => {
-              slideRefs.current[featureIndex].scrollIntoView({
-                block: "nearest",
-                inline: "nearest",
-              });
-            }}
+            onClick={() => handleSlideChange(featureIndex)}
           >
             <span className="absolute -inset-x-1.5 -inset-y-3" />
           </button>

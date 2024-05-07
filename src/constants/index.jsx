@@ -10,11 +10,13 @@
 
 export const navData = [
   { _id: 101, title: "home", href: "#home" },
-  { _id: 102, title: "features", href: "#features" },
-  { _id: 103, title: "model", href: "#model" },
+  { _id: 102, title: "model", href: "#model" },
+  { _id: 103, title: "features", href: "#features" },
   { _id: 104, title: "howitworks", href: "#howitworks" },
+  { _id: 106, title: "vision", href: "#vision" },
   { _id: 105, title: "pricing", href: "#pricing" },
 ];
+
 
 export const modelData = [
   {
@@ -56,6 +58,7 @@ export const modelData = [
   // },
 ];
 
+/*
 export const modelDataCol = [
   {
     name: "modelOneTitleCol",
@@ -82,7 +85,7 @@ export const modelDataCol = [
       icon: "/Elementos-2D-04.svg",
   },
   
-]
+]*/
 
 export const howData = [
   {
@@ -110,21 +113,62 @@ export const howDataCol = [
     name: "howOneTitleCol",
     description:
       "howOneSubtitleCol",
-    icon: "/uno.svg",
+    icon: "/num1.svg",
   },
   {
     name: "howTwoTitleCol",
     description:
       "howTwoSubtitleCol",
-    icon: "/dos.svg",
+    icon: "/num2.svg",
   },
   {
     name: "howThreeTitleCol",
     description:
       "howThreeSubtitleCol",
-    icon: "/tres.svg",
+    icon: "/num3.svg",
+  },
+  {
+    name: "howFourTitleCol",
+    description:
+      "howFourSubtitleCol",
+    icon: "/num4.svg",
   },
 ];
+
+export const modelDataCol = [
+  {
+    name: "modelOneTitleCol",
+    icon: "/Elementos-2D-01.svg",
+  },
+  {
+    name: "modelTwoTitleCol",
+    icon: "/Elementos-2D-02.svg",
+  },
+];
+
+export const DataVision = [
+  {
+    name: "Integridad",
+    icon: "/forma44.svg",
+  },
+  {
+    name: "Innovación",
+    icon: "/forma44.svg",
+  },
+  {
+    name: "Orientacion al Cliente",
+    icon: "/forma44.svg",
+  },
+  {
+    name: "Transparencia",
+    icon: "/forma44.svg",
+  },
+  {
+    name: "Responsabilidad",
+    icon: "/forma44.svg",
+  },
+];
+
 
 export const pricingData = [
   {
@@ -146,21 +190,17 @@ export const pricingData = [
 ];
 
 export const pricingDataCol = [
-  {
-    name: "pricingOneTitleCol",
-    description:
-      "pricingOneSubtitleCol",
-    ammount: 
-      "pricingOneAmmountCol",
-    icon: "/Elementos-2D-10.svg",
-  },
+  /*{
+    // name: "pricingOneTitleCol",
+    // description: "pricingOneSubtitleCol",
+    // ammount: "pricingOneAmmountCol",
+    // icon: "/Elementos-2D-10.svg"
+  },*/
   {
     name: "pricingTwoTitleCol",
-    description:
-      "pricingTwoSubtitleCol",
-    ammount: 
-      "pricingTwoAmmountCol",
-    icon: "/Elementos-2D-15.svg",
+    description: "pricingTwoSubtitleCol",
+    ammount: "pricingTwoAmmountCol",
+    icon: "/Elementos-2D-15.svg"
   },
 ];
 
