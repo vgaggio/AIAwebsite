@@ -18,8 +18,8 @@ function Home() {
       <Feature />
       <HowItWorks />
       <CallToAction />
+      <Vision />
       <Pricing/>
-  
       <BackedBy />
       <InterestedIn />
     </main>
