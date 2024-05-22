@@ -48,13 +48,13 @@ const Vision = () => {
   };
 
   return (
-    <section id="vision" className={isMobile ? "pt-20" : "pt-36"}>
+    <section id="vision" className={isMobile ? "py-20" : "py-36"}>
       <Container aria-label="Vision Section">
         <div className="mx-auto max-w-md">
           <div className="flex flex-wrap justify-center items-start">
             <Title
               title={t("Visión")}
-              className="text-3xl text-center"
+              className="text-4xl text-center"
             />
             <LineBackground color1="#CAF1B8" color2="#98C9F0" width={500} height={25} className="my-4"/> {/* Línea como separación */}
             <div className={"text-lg text-center"}>
