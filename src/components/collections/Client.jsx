@@ -15,6 +15,43 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+
+const StyledSlider = styled(Slider)`
+  .slick-dots {
+    bottom: -30px;
+
+    li {
+      width: 24px;
+      height: 4px;
+      background-color: transparent;
+      border-radius: 0;
+      margin: 0 5px;
+
+      button {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        background-color: gray;
+        border: none;
+        outline: none;
+
+        &:before {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: gray;
+          transition: background-color 0.3s;
+        }
+      }
+
+      &.slick-active button:before {
+        background-color: white;
+      }
+    }
+  }
+`;
 
 const Client = () => {
     const { t, i18n } = useTranslation();
@@ -131,7 +168,7 @@ const Client = () => {
                         title={t('howItWorksTitleCol')}
                         className="text-3xl text-white pt-6 text-center"
                     />
-                    <Slider {...settings} className="mx-auto max-w-6xl text-left py-6">
+                    <StyledSlider {...settings} className="mx-auto max-w-6xl text-left py-6">
                         {Gestion.map((item, index) => (
                             <div key={index} className="text-center py-2 px-6">
                                 <div className={`${isMobile ? "bg-gray-700 mx-auto max-w-xl sm:text-left rounded-xl h-56 py-2 px-2 content-center" : "bg-gray-700 mx-auto max-w-xl sm:text-left rounded-xl h-72 py-2 px-2"}`}>
@@ -147,7 +184,7 @@ const Client = () => {
                                 </div>
                             </div>
                         ))}
-                    </Slider>
+                    </StyledSlider>
                 </div>
             </Container>
         </section>
@@ -155,3 +192,4 @@ const Client = () => {
 };
 
 export default Client;
+
