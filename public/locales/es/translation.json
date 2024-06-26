@@ -170,5 +170,8 @@
    "turnOff":"¡Presiona para apagar!",
    "wait":"Espera unos segundos...",
    "inputWorkEmail":"Ingrese un mail de trabajo",
-   "tryBircleEmail":"Prueba Bircle. ¡Enviame un mail!"
+   "tryBircleEmail":"Prueba Bircle. ¡Enviame un mail!",
+   "emailSent": "Email enviado",
+   "errorTryAgain": "Hubo un error... Intente nuevamente",
+   "connectionError": "Error de conexión"
   }

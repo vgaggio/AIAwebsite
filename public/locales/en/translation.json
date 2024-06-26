@@ -168,7 +168,8 @@
   "turnOff":"Press to turn off!",
   "wait":"Wait a few seconds...",
   "inputWorkEmail":"Enter a work email",
-  "tryBircleEmail":"Try Bircle. Send me an email!"
-
-
+  "tryBircleEmail":"Try Bircle. Send me an email!",
+  "emailSent": "Email Sent",
+  "errorTryAgain": "Error - Try Again",
+  "connectionError": "Connection Error"
 }
