@@ -9,7 +9,7 @@ import BackgroundDesign from "./BackgroundDesign";
 import PhoneFrame from "./PhoneFrame";
 import AppFeature from "./AppFeature";
 import { useTranslation } from "next-i18next";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 
 
 const Hero = () => {
@@ -44,6 +44,8 @@ const Hero = () => {
         }`}
     >
       <Container>
+
+      <Toaster position="bottom-right" /> {/* Asegúrate de tener el Toaster aquí */}
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
           {/* Right side */}
           <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6">
@@ -178,15 +180,15 @@ function EmailSender() {
       if (response.ok) {
         setEmail("");
         setIsSubmitting(false);
-        toast.success("Se le envió un mail a su casilla de correo. Revisar en spam si no lo encuentra.");
+        toast.success(t("emailSent"));
         setOpinion('');
       } else {
         setIsSubmitting(false);
-        toast.error(`Hubo un problema... Intente nuevamente.`);
+        toast.error(t("errorTryAgain"));
       }
     } catch (error) {
       setIsSubmitting(false);
-      toast.error(`Error de conexión`);
+      toast.error(t("connectionError"));
     }
   };
 
