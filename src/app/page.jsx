@@ -12,6 +12,7 @@ import Vision from "../components/collections/Vision";
 import Client from "../components/collections/Client";
 import Footer from "../components/customersupport/Footer";
 import Header from "../components/customersupport/Header";
+import Carousel from "../components/collections/Carousel";
 
 function Home() {
   return (
@@ -19,6 +20,7 @@ function Home() {
       <Header/>
       <Hero />
       <TranslateButton />
+      {/* <Carousel/> */}
       <Model />
       <Feature />
       <HowItWorks />

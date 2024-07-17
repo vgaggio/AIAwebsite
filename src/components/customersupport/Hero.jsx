@@ -59,6 +59,7 @@ const Hero = () => {
           </div>
           {/* <ExtraLogos /> */}
         </div>
+        
       </Container>
     </section>
   );

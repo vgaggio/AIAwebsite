@@ -88,8 +88,8 @@
   "appCaseOne": "hello hi",
   "appCaseTwo": "how are you?",
   "appCaseThree": "what services do you offer?",
-  "heroTitleCol": "Start collecting smartly...",
-  "heroSubtitleCol": "Bircle automates your company's collection management so you can focus on your core business. We make the payment process easy for your customers, take care of your brand, and reduce delinquency rates.",
+  "heroTitleCol": "Respectful collection powered by AI",
+  "heroSubtitleCol": "Equip your team with the best collection tools and AI, automating the entire workflow while increasing collections.",
   "heroWatchTheVideoCol": "Watch the video",
   "heroTrustedCol": "Trusted by top companies",
   "appAnswerDefaultCol": "Dear Juan Perez, ID X. We are X Insurance. You have an overdue installment for the period of March amounting to $X. To avoid issues with your coverage, you can make your payment here:",  
@@ -191,6 +191,6 @@
   "websiteIfYouPrefer": "website if you prefer.",
   "poweredBy": "Powered by",
   "validateEmailLink": "Go to your mailbox and validate the link provided by our provider AWS SES. Once this operation is done, click the Validate button.",
-  "saludo": "Hey Debtor,"
+  "saludo": "Hi"
 }
   

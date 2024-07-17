@@ -6,6 +6,7 @@ import Title from "./Title";
 import { modelDataCol } from "../../constants";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
+import Carousel from "./Carousel";
 
 const Model = () => {
   const { t } = useTranslation();
@@ -45,9 +46,8 @@ const Model = () => {
   return (
     <section id="model" className={`py-${isNotMobile ? '40' : '10'}`}>
       <div ref={headerRef}>
-        {/* Aquí va el contenido del encabezado */}
       </div>
-      <Container aria-label="Features for building a portfolio">
+      <Container aria-label="Features for building a portfolio">  
         <div className="mx-auto max-w-2xl sm:text-center">
           <Title
             title={t("modelTitleCol")}
@@ -97,7 +97,6 @@ const Model = () => {
             </li>
           ))}
         </ul>
-
       </Container>
     </section>
   );
