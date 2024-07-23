@@ -28,6 +28,8 @@ module.exports = {
       }),
       screens: {
         'xs': '428px',
+        'xxxs': '375px',
+
       },
       animation: {
         "fade-in": "fade-in 0.5s linear forwards",

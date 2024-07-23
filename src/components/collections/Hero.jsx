@@ -40,7 +40,7 @@ const Hero = () => {
     <section
       id="home"
       className={`overflow-hidden transition-opacity duration-100 
-      ${isMobile ? "mt-6 py-10" : "py-32"} ${isVisible ? "opacity-100" : "opacity-0"
+      ${isMobile ? " py-10" : "py-32"} ${isVisible ? "opacity-100" : "opacity-0"
         }`}
     >
       <Container>
@@ -51,7 +51,7 @@ const Hero = () => {
           <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6">
             <Title
               title={t("heroTitleCol")}
-              className={`text-4xl transition-opacity duration-100 ${isVisible ? "opacity-100" : "opacity-0"
+              className={`sm:max-w-md sm:text-3xl text-3xl transition-opacity duration-100 ${isVisible ? "opacity-100" : "opacity-0"
                 }`}
             />
             <p
@@ -238,7 +238,7 @@ function EmailSender() {
         
         <Title
           title={t("tryBircleEmail")}
-          className={`text-xl transition-opacity sm:ml-14 ml-6 sm:mt-0 mt-2`}
+          className={`text-xl transition-opacity sm:ml-14 ml-10 xs:ml-16 xxxs:ml-14 sm:mt-0 mt-6`}
         />
         <form
           className="mt-6 sm:ml-14 ml-6 flex w-full max-w-md rounded-lg bg-white p-2 shadow-lg animate-slide-in-up"
